@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Value of Your Life — India's ledger of preventable tragedies</title>
+  <meta name="description" content="A state-wise public record of India's mass-casualty disasters over the last 20 years: who died, what the state paid, and who actually answered for it." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,650;0,800;1,400&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="#">
+        <span class="brand-mark" aria-hidden="true">₹</span>
+        <span class="brand-name">Value of Your Life</span>
+      </a>
+      <span class="topbar-note">A citizen-maintained public record · 2006 — present</span>
+      <button class="submit-btn" id="open-submit" type="button">Submit an incident</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="shell">
+      <h1 class="hero-head">
+        After a preventable tragedy in India, the state settles on a price for your life.
+        <em>The going rate is about <span class="hero-price" id="hero-price">₹6,00,000</span>.</em>
+        What it almost never delivers is a conviction.
+      </h1>
+      <p class="hero-sub">
+        Every major mass-casualty disaster of the last twenty years — what happened, what was paid,
+        who was blamed, and who, if anyone, actually answered for it. Compensation is counted here
+        because it is usually the only accountability that ever arrives.
+      </p>
+      <div class="kpis" id="national-tally" aria-label="National tally"></div>
+    </div>
+  </section>
+
+  <nav class="controls" aria-label="Filters">
+    <div class="shell controls-inner">
+      <input id="f-search" class="search" type="search" placeholder="Search incidents, cities, people, companies…" autocomplete="off" aria-label="Search the record" />
+      <select id="f-state" aria-label="Filter by state"><option value="">All states</option></select>
+      <select id="f-category" aria-label="Filter by type"><option value="">All types</option></select>
+      <select id="f-status" aria-label="Filter by case status"><option value="">Any case status</option></select>
+      <div class="seg" role="group" aria-label="Arrange">
+        <button class="seg-btn is-active" data-view="state" type="button">By state</button>
+        <button class="seg-btn" data-view="time" type="button">By year</button>
+        <button class="seg-btn" data-view="toll" type="button">By toll</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="shell ledger" id="ledger"></main>
+
+  <dialog class="casefile" id="casefile">
+    <div class="cf-scroll" id="casefile-body"></div>
+  </dialog>
+
+  <dialog class="submit-dialog" id="submit-dialog">
+    <form method="dialog" class="submit-form" id="submit-form">
+      <button class="cf-close sd-close" type="button" aria-label="Close" value="cancel">✕</button>
+      <h2>Submit an incident</h2>
+      <p class="sd-intro">
+        Know of a tragedy that belongs on this record? Share a news link. The link is researched
+        automatically — corroborating coverage is gathered from other outlets — and a maintainer
+        verifies the facts before it appears here.
+      </p>
+      <label for="sd-url">News link <span class="req">required</span></label>
+      <input id="sd-url" type="url" required placeholder="https://… (the news outlet's own page, not a Google News link)" />
+      <label for="sd-notes">What happened <span class="opt">optional</span></label>
+      <textarea id="sd-notes" rows="3" placeholder="Anything the article doesn't say — state, casualty count, whether anyone was arrested or punished…"></textarea>
+      <div class="sd-actions">
+        <button class="sd-submit" type="submit" value="submit">Continue on GitHub</button>
+      </div>
+      <p class="sd-footnote">
+        Submissions become public GitHub issues. Casualty and accountability details are verified
+        editorially — automated research drafts the entry, a human publishes it.
+      </p>
+    </form>
+  </dialog>
+
+  <footer class="colophon">
+    <div class="shell">
+      <h2>About this record</h2>
+      <p>
+        <strong>Value of Your Life</strong> is a seed dataset compiled from public reporting —
+        Wikipedia, news archives and court records. Death tolls use widely reported figures; where
+        the official count is disputed, the entry says so. <strong>“Convicted” means convicted by a
+        court</strong> — not arrested, not suspended, not transferred. Arrests and suspensions are
+        listed separately because they are so often where the story ends.
+      </p>
+      <p>
+        The “value” shown per incident is the ex-gratia the state announced per deceased — the
+        number a government reaches within hours of a tragedy it will spend decades not prosecuting.
+      </p>
+      <p>
+        This is a starting point, not a complete record. New incidents are gathered by a scheduled
+        scraper (see <code>scraper/</code>) and reviewed by hand before entering the ledger. If an
+        entry is wrong or out of date, correct it — that is the point of a ledger.
+      </p>
+      <p class="fineprint" id="colophon-meta"></p>
+    </div>
+  </footer>
+
+  <script src="data/incidents.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

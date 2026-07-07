@@ -1,0 +1,26 @@
+name: Submit an incident
+description: Share a news link about a mass-casualty incident. The link is researched automatically and drafted for review.
+title: "[Incident] "
+labels: ["incident-submission"]
+body:
+  - type: input
+    id: url
+    attributes:
+      label: News link
+      description: A link to the incident from the news outlet's own site (not a Google News link).
+      placeholder: "https://…"
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: What happened (optional)
+      description: Anything you know that the article doesn't say — state, casualty count, whether anyone was arrested or punished.
+    validations:
+      required: false
+  - type: markdown
+    attributes:
+      value: |
+        **What happens next:** an automated job fetches your link, finds corroborating coverage from
+        other outlets, and drafts a candidate entry as a pull request. A maintainer verifies the facts
+        (especially casualty and accountability details) before it appears on the site.

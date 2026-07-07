@@ -1,0 +1,36 @@
+name: Weekly incident scrape
+
+on:
+  schedule:
+    - cron: "30 2 * * 1" # Mondays 02:30 UTC (08:00 IST)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Scrape Wikipedia for new candidate incidents
+        run: node scraper/scrape.mjs --years-back 20 --verbose
+
+      - name: Open PR with new candidates
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "scraper: new candidate incidents for review"
+          title: "Scraper: new candidate incidents for review"
+          body: >
+            Automated weekly sweep of Wikipedia disaster categories.
+            Review `scraper/candidates.json`, promote real incidents into
+            `data/incidents.js` with researched accountability fields, and mark
+            each candidate's status as `accepted` or `rejected`.
+          branch: scraper/candidates
+          add-paths: scraper/candidates.json
