@@ -5,7 +5,7 @@
 
   // GitHub repo that receives incident submissions, as "owner/repo".
   // Until it's set, the submit dialog falls back to local instructions.
-  const SUBMIT_REPO = "";
+  const SUBMIT_REPO = "walnashgit/myworthinthiscountry";
 
   const DATA = (window.INCIDENTS || []).slice().sort((a, b) => b.date.localeCompare(a.date));
 
